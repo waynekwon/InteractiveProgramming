@@ -1,0 +1,19 @@
+Task List
+
+1. Instead of 'Messi', we'll try to have a character
+2. We'll have a background of crowds behind the goal
+3. We will have 3 directions - left, center, right
+4. Our games will be USER vs COMPUTER
+5. When we are shooting, computer will choose directions using random integers
+ - 3 numbers would each correspond to 3 directions
+ - We will have to move the ball in the right direction
+ - We will have to move the goalie in the right direction so that when it blocks the ball, the graphic doesn't look weird
+6. When Computer is shooting, both the goalie and kicker will choose their directions based on random integers
+7. We will count the scores - if the directions match, it's not a goal, and if the directions don't match, it's a goal
+8. If a player scores, we'll have sound of crowds going crazy, and if he doesn't score, the crowd will boo
+9. It will be out of 5 shots for each players
+10. In the end, whoever scored more will win
+
+
+
+Our Estimation of Hours for this project is roughly 10 hours (each)
