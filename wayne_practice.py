@@ -18,18 +18,10 @@ class Ball(object):
             self.dy *= -1
         self.dy *= 0.99
 
-    def draw(self, surface):
-        pygame.draw.circle(surface, BLUE, (self.x, int(self.y)), self.radius)
-
-    def draw_gauges(self, surface):
-        ke = self.dy ** 2
-        pe = (480 - self.y) ** 2
-        pygame.draw.line(surface, RED, (10, 480), (10, 480 - int(ke * 20)), 20)
-        pygame.draw.line(surface, RED, (40, 480), (40, 480 - int(pe / 10)), 20)
 
     def reset(self):
-        self.x = 320
-        self.y = 240
+        self.x = 800
+        self.y = 600
         self.dy = 0
 
     def contains_pt(self, pt):
@@ -39,9 +31,35 @@ class BallView(object):
     def __init__(self, model):
         self.model = model
 
-    def draw(self, surface):
-        model = self.model
-        pygame.draw.circle(surface, BLUE, (model.x, int(model.y)), model.radius)
+    def draw(self, screen):
+                
+	#draw on the surface object
+	screen.fill(GREEN)
+
+	#loading images
+	soccerball = pygame.image.load('soccerball.png')
+	soccerball = pygame.transform.scale(soccerball, (60, 60))
+	kicker = pygame.image.load('Kicker.png')
+	kicker = pygame.transform.scale(kicker, (150, 150))
+	goalie = pygame.image.load('Goalie.png')
+	goalie = pygame.transform.scale(goalie, (175,175))
+	soccernet = pygame.image.load('goalnets')
+	soccernet = pygame.transform.scale(soccernet, (600, 250))
+	crowd = pygame.image.load('crowd')
+	crowd = pygame.transform.scale(crowd, (1600, 450))
+	ballrect = soccerball.get_rect()
+	speed = [2, 2]
+
+	screen.blit(soccerball, (self.model.x,self.model.y)) 
+    	screen.blit(crowd, (0, 0))
+	screen.blit(soccernet, (500, 220))
+	screen.blit(kicker, (830, 650))
+	screen.blit(goalie, (730, 350))
+
+    def draw_gauges(self, surface):
+        pe = (480 - self.model.y) ** 2
+        pygame.draw.line(surface, RED, (40, 480), (40, 480 - int(pe / 10)), 20)
+	
 
 class BallEnergyView(object):
     def __init__(self, model):
@@ -49,9 +67,7 @@ class BallEnergyView(object):
 
     def draw(self, surface):
         model = self.model
-        ke = model.dy ** 2
         pe = (480 - model.y) ** 2
-        pygame.draw.line(surface, RED, (10, 480), (10, 480 - int(ke * 20)), 20)
         pygame.draw.line(surface, RED, (40, 480), (40, 480 - int(pe / 10)), 20)
 
 class BounceController(object):
@@ -78,7 +94,7 @@ pygame.display.set_caption('Penalty Shootout!')
 
 ball = Ball()
 models = [ball]
-
+ballview=BallView(ball)
 views = []
 views.append(BallView(ball))
 views.append(BallEnergyView(ball))
@@ -116,23 +132,9 @@ GREEN = (  0, 250,   0)
 BLUE  = (  0,   0, 255)
 RED = (255, 0, 0)
 
-#loading images
 
-soccerball = pygame.image.load('soccerball.png')
-soccerball = pygame.transform.scale(soccerball, (60, 60))
-kicker = pygame.image.load('Kicker.png')
-kicker = pygame.transform.scale(kicker, (150, 150))
-goalie = pygame.image.load('Goalie.png')
-goalie = pygame.transform.scale(goalie, (175,175))
-soccernet = pygame.image.load('goalnets')
-soccernet = pygame.transform.scale(soccernet, (600, 250))
-crowd = pygame.image.load('crowd')
-crowd = pygame.transform.scale(crowd, (1600, 450))
-ballrect = soccerball.get_rect()
-speed = [2, 2]
 
-#draw on the surface object
-screen.fill(GREEN)
+
 
 running = True
 while running == True:
@@ -146,16 +148,9 @@ while running == True:
         model.step()
 
     
-
     ball.step()
-
-    screen.blit(crowd, (0, 0))
-    screen.blit(soccernet, (500, 220))
-    screen.blit(soccerball, (800,600))
-    screen.blit(kicker, (830, 650))
-    screen.blit(goalie, (730, 350))
-    ball.draw(screen)
-    ball.draw_gauges(screen)
+    ballview.draw(screen)
+    ballview.draw_gauges(screen)
    
 
 
