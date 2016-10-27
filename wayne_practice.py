@@ -18,26 +18,29 @@ BLUE  = (  0,   0, 255)
 
 soccerball = pygame.image.load('soccerball.png')
 soccerball = pygame.transform.scale(soccerball, (50, 50))
-messi = pygame.image.load('messi.png')
+messi = pygame.image.load('messi')
 messi = pygame.transform.scale(messi, (100, 100))
-soccernet = pygame.image.load('goalnets.png')
+soccernet = pygame.image.load('goalnets')
 soccernet = pygame.transform.scale(soccernet, (600, 250))
+crowd = pygame.image.load('crowd')
+crowd = pygame.transform.scale(crowd, (1600, 450))
 ballrect = soccerball.get_rect()
 speed = [2, 2]
 
 #draw on the surface object
 screen.fill(GREEN)
-pygame.draw.rect(screen, BLUE, (0,0,1600,450),0)
-
 
 running = True
 while running == True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
+    screen.blit(crowd, (0, 0))
     screen.blit(soccernet, (500, 220))
     screen.blit(soccerball, (800,600))
     screen.blit(messi, (830, 650))
+   
+
 
     pygame.display.flip()
 
