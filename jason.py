@@ -1,19 +1,32 @@
 import pygame, sys
 import os
 import random
+import time
 from pygame.locals import *
 
 
 def result(ball, goalie): 
 	if ball.movement[pygame.K_LEFT] and goalie.random_direction == 1:
-	    print 'No Goal' 
+	    print 'No Goal'
+	    pygame.mixer.music.load("boo.mp3")
+	    pygame.mixer.music.play()
+	    time.sleep(10)
 	    return False
 	if ball.movement[pygame.K_UP] and goalie.random_direction == 2:
 	    print 'No Goal'
+	    pygame.mixer.music.load("boo.mp3")
+	    pygame.mixer.music.play()
+	    time.sleep(10)
 	    return False
 	if ball.movement[pygame.K_RIGHT] and goalie.random_direction == 3:
 	    print 'No Goal'
+	    pygame.mixer.music.load("boo.mp3")
+	    pygame.mixer.music.play()
+	    time.sleep(10)
 	    return False
+	pygame.mixer.music.load("applause.mp3")
+	pygame.mixer.music.play()
+	time.sleep(10)
 	print 'GOAL!!!!!'
 	return True
 
