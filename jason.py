@@ -7,27 +7,15 @@ from pygame.locals import *
 
 def result(ball, goalie): 
 	if ball.movement[pygame.K_LEFT] and goalie.random_direction == 1:
-	    print 'No Goal'
-	    pygame.mixer.music.load("boo.mp3")
-	    pygame.mixer.music.play()
-	    time.sleep(10)
+	    screen.blit(NoGoal, (730,550))
 	    return False
 	if ball.movement[pygame.K_UP] and goalie.random_direction == 2:
-	    print 'No Goal'
-	    pygame.mixer.music.load("boo.mp3")
-	    pygame.mixer.music.play()
-	    time.sleep(10)
+	    screen.blit(NoGoal, (730,550))
 	    return False
 	if ball.movement[pygame.K_RIGHT] and goalie.random_direction == 3:
-	    print 'No Goal'
-	    pygame.mixer.music.load("boo.mp3")
-	    pygame.mixer.music.play()
-	    time.sleep(10)
+	    screen.blit(NoGoal, (730,550))
 	    return False
-	pygame.mixer.music.load("applause.mp3")
-	pygame.mixer.music.play()
-	time.sleep(10)
-	print 'GOAL!!!!!'
+	screen.blit(Goal, (730,550))
 	return True
 
 class Ball(pygame.sprite.Sprite):
@@ -115,6 +103,15 @@ class Background(object):
 
 pygame.init()
 
+#initialize font
+myfont=pygame.font.SysFont("monospace",50)
+
+#render text
+Goal = myfont.render("GOAL!!!!", 3, (0,0,0))
+NoGoal = myfont.render("NO GOAL!!!", 3, (0,0,0))
+
+
+
 FPS = 30
 fpsClock = pygame.time.Clock()
 display_width = 1600
@@ -163,7 +160,6 @@ while running == True:
 	    result(ball, goalie)
 	pygame.display.update()
   	fpsClock.tick(FPS)
-	print ball.y
 	continue
 
     ball.position(screen)
@@ -182,14 +178,6 @@ while running == True:
     goalie.position(screen)
     fpsClock.tick(FPS)
 
-
-
-#    for event in pygame.event.get():
-#        if event.type == pygame.QUIT:
-#            running = False
-#            #pygame.display.quit()
-#            sys.exit()
-#    pygame.display.update()
 
 pygame.quit()
 quit()
