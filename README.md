@@ -2,6 +2,7 @@ Penalty Shootout Practice
 
 This game is made to practice penalty shootout (soccer). 
 
+Before you run the game, make sure that you download all the necessary images.
 
 To run the game, simply run 'penaltykickpractice.py'. 
 You are the kicker (dog) and the computer is a goalie (cat). 
